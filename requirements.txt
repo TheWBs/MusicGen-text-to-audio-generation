@@ -7,3 +7,5 @@ numpy>=1.26
 sentencepiece>=0.2
 protobuf>=5
 jupyter-server-proxy>=4.4
+datasets>=3.0
+soundfile>=0.12
