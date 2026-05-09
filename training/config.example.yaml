@@ -2,9 +2,9 @@ base_model: facebook/musicgen-small
 dataset_dir: datasets/custom_music
 output_dir: checkpoints/musicgen-custom
 sample_rate: 32000
-max_audio_seconds: 30
+max_audio_seconds: 4
 batch_size: 1
-gradient_accumulation_steps: 8
-learning_rate: 0.00001
-max_steps: 100
-mixed_precision: fp16
+gradient_accumulation_steps: 4
+learning_rate: 0.000001
+max_steps: 30
+mixed_precision: none
