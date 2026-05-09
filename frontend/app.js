@@ -60,12 +60,12 @@ async function getJson(url, options) {
 async function refreshHealth() {
   try {
     const health = await getJson("api/health");
-    setStatus("online", "REST API online");
+    setStatus("online", "Online");
     modelLabel.textContent = health.model_loaded
       ? `${health.model_id} loaded`
       : `${health.model_id} ready`;
     deviceValue.textContent = health.device;
-    modeValue.textContent = health.demo_mode ? "Demo stub" : "Pretrained MusicGen";
+    modeValue.textContent = health.demo_mode ? "Demo stub" : "Fine-tuned MusicGen";
     durationInput.max = String(health.max_duration_seconds);
   } catch (error) {
     setStatus("error", `API unavailable: ${error.message}`);
@@ -139,7 +139,7 @@ form.addEventListener("submit", async (event) => {
     audioPlayer.load();
     generationMeta.textContent = `${result.duration_seconds}s generated in ${result.generation_seconds}s`;
     deviceValue.textContent = result.device;
-    modeValue.textContent = result.demo_mode ? "Demo stub" : "Pretrained MusicGen";
+    modeValue.textContent = result.demo_mode ? "Demo stub" : "Fine-tuned MusicGen";
     setStatus("online", "Generation complete");
     await refreshHealth();
     await refreshHistory();
@@ -148,7 +148,7 @@ form.addEventListener("submit", async (event) => {
     generationMeta.textContent = "Generation failed";
   } finally {
     generateButton.disabled = false;
-    generateButton.querySelector("span:last-child").textContent = "Generate with REST API";
+    generateButton.querySelector("span:last-child").textContent = "Generate";
     waveform.classList.remove("is-generating");
   }
 });
