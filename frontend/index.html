@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MusicGen Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="MusicGen generation workspace">
+        <header class="topbar">
+          <div>
+            <h1>MusicGen Studio</h1>
+            <p>Text-to-audio generation through a FastAPI REST service.</p>
+          </div>
+          <div class="status-strip" id="statusStrip">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="statusText">Checking API</span>
+          </div>
+        </header>
+
+        <div class="layout-grid">
+          <form class="panel generator-panel" id="generateForm">
+            <div class="panel-heading">
+              <h2>Generate Audio</h2>
+              <span id="modelLabel">Model loading on demand</span>
+            </div>
+
+            <label class="field">
+              <span>Prompt</span>
+              <textarea
+                id="promptInput"
+                name="prompt"
+                rows="7"
+                maxlength="500"
+                required
+              >A cinematic synthwave track with pulsing bass, bright arpeggios, and a calm atmospheric intro</textarea>
+            </label>
+
+            <div class="control-grid">
+              <label class="field">
+                <span>Duration</span>
+                <div class="range-row">
+                  <input id="durationInput" type="range" min="2" max="20" value="8" />
+                  <output id="durationOutput">8 s</output>
+                </div>
+              </label>
+
+              <label class="field">
+                <span>Guidance</span>
+                <input id="guidanceInput" type="number" min="1" max="10" step="0.5" value="3" />
+              </label>
+
+              <label class="field">
+                <span>Temperature</span>
+                <input id="temperatureInput" type="number" min="0.1" max="2" step="0.1" value="1" />
+              </label>
+
+              <label class="field">
+                <span>Seed</span>
+                <input id="seedInput" type="number" min="0" max="2147483647" placeholder="Random" />
+              </label>
+            </div>
+
+            <button class="primary-button" id="generateButton" type="submit">
+              <span class="button-icon" aria-hidden="true">▶</span>
+              <span>Generate with REST API</span>
+            </button>
+          </form>
+
+          <section class="panel result-panel" aria-label="Latest generated result">
+            <div class="panel-heading">
+              <h2>Latest Result</h2>
+              <span id="generationMeta">Waiting for generation</span>
+            </div>
+
+            <div class="waveform" id="waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <audio id="audioPlayer" controls></audio>
+
+            <dl class="api-facts">
+              <div>
+                <dt>REST endpoint</dt>
+                <dd><code>POST /api/generate</code></dd>
+              </div>
+              <div>
+                <dt>Device</dt>
+                <dd id="deviceValue">Unknown</dd>
+              </div>
+              <div>
+                <dt>Mode</dt>
+                <dd id="modeValue">Unknown</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+
+        <section class="panel history-panel" aria-label="Generation history">
+          <div class="panel-heading">
+            <h2>History</h2>
+            <button class="ghost-button" id="refreshButton" type="button">Refresh</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
