@@ -1,0 +1,38 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated audio and model/cache artifacts should stay out of git.
+outputs/
+generated/
+data/
+datasets/
+models/
+checkpoints/
+*.wav
+*.mp3
+*.flac
+
+# Jupyter noise
+.ipynb_checkpoints/
+
+# Local environment/config secrets
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies/build output
+node_modules/
+dist/
+build/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
