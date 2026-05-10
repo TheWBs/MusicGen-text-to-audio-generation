@@ -103,4 +103,4 @@ python training/train_musicgen_decoder.py \
   --mixed-precision none
 ```
 
-More details are in `docs/FINE_TUNING_PLAN.md`.
+Fine-tuning details are documented in `docs/FINE_TUNING.md`.
